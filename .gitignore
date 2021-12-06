@@ -1,2 +1,4 @@
 EWARM/190208_CTRco2/Obj/
 EWARM/190208_CTRco2/Exe/
+*.wsdt
+*.map
