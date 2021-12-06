@@ -82,12 +82,10 @@ void hw_init(void)
   
   gP = &gd;    
   gP->dbg = &dbg;  
+	gP->i2c->dev = &i2c_hdc1080;
 	
 	dbg.b.lvl  = CGF_DBG_LEVEL;
-	
-	gP->i2c->dev = &i2c_hdc1080;
-	//gP->i2c->dev->init();
-	
+		
   Init_sdc30();
   Init_as1115();
   Init_hdc1080();

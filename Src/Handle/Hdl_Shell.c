@@ -336,7 +336,7 @@ INT8 do_reset(struct shell_t *p)
 * COMMANDS
 *********************************************************************************************************
 */
-static CMD_LIST    cmd_tbl[]={
+static CMD_LIST cmd_tbl[]={
 	{"res",  do_reset,      	"s/w reset"},
 	NULL,
 };

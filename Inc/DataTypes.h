@@ -235,7 +235,8 @@ typedef struct SDC30_t{
 typedef struct global_t
 {
 	int gTickTime;
-
+	uint8_t uDeviceMode;
+	
   TypeDef_HDC1080_t *hdc;
   TypeDef_SDC30_t *sdc;
   TypeDef_AS1115_t *as1;

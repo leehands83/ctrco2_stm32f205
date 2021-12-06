@@ -154,6 +154,7 @@ typedef enum{
 	ST_CHECKID,
   ST_CONFIG,
   ST_WORK,
+	ST_NOWORK,
 }Sched_t;
 
 
@@ -184,13 +185,11 @@ void HD_hdc1080(void)
 		case ST_CHECKID:
 			cmd = HDC_1080_MANUFACTUREID;
 			if(hdc1080.read(hdc1080.pMfID,&cmd,2) == true){
-				if(*hdc1080.pMfID == 'T')
-				{
+				if(*hdc1080.pMfID == 'T'){
 					status = ST_CONFIG;		// Init Complete Jodge
 				}
-				else
-				{
-					// ERROR	
+				else{
+					status = ST_NOWORK;
 				}
 			}
 			break;
@@ -205,13 +204,16 @@ void HD_hdc1080(void)
       break;
     case ST_WORK:
 			cmd = HDC_1080_TEMPERATURE_REGI;
-			if(hdc1080.read(buff,&cmd,4) == true)
-			{
+			if(hdc1080.read(buff,&cmd,4) == true){
 				temp_x =((buff[0]<<8)|buff[1]);
 				humi_x =((buff[2]<<8)|buff[3]);
 				hdc1080.temperature  = (float)((temp_x/65536.0f)*165.0f)-40.0f;
 				hdc1080.humidity     = (float)((humi_x/65536.0f)*100.0f);
 			}
+			break;
+		case ST_NOWORK:
+			asm("NOP");
+			// No Connected HDC1080 Device
 			break;
     default:	// Init
       status = ST_PWRON;

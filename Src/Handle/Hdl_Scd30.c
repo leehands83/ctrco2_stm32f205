@@ -356,6 +356,7 @@ void HD_sdc30(void)
       status = ST_READ_READY;      
       break;
 		case ST_NOWORK:
+			asm("NOP");
 			// No Connected SCD30 Device
 			break;
     default:
